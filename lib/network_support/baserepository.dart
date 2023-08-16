@@ -17,7 +17,11 @@ abstract class BaseRepository {
 
     try {
       var response = await _client.get(url);
+      debugPrint('response $response');
+
       if (response.statusCode == HttpStatus.ok) {
+        debugPrint('statusCode ${response.statusCode}');
+
         final data = convert.jsonDecode(response.body);
         return data;
       } else {

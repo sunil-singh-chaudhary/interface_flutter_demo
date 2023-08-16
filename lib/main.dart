@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:interface_abstract_flutter_demo/bloc_http/bloc/user_bloc_bloc.dart';
 
 import 'homepage.dart';
 
@@ -17,7 +19,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: MultiBlocProvider(providers: [
+        BlocProvider<UserBlocBloc>(
+          create: (context) {
+            return UserBlocBloc();
+          },
+        ),
+      ], child: const HomePage()),
     );
   }
 }
