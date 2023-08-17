@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             return UserBlocBloc();
           },
         ),
-      ], child: const HomePage()),
+      ], child: HomePage()),
     );
   }
 }

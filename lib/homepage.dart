@@ -5,19 +5,36 @@ import 'package:interface_abstract_flutter_demo/listwidget.dart';
 import 'bloc_http/bloc/user_bloc_bloc.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key});
+  var userBloc;
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    super.initState();
+    widget.userBloc = BlocProvider.of<UserBlocBloc>(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: SizedBox(
-        child: Center(child: ListviewWidget()),
+      body: Center(
+        child: ElevatedButton(
+            onPressed: () {
+              widget.userBloc.add(GetUserList()); // Dispatch the event
+
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ListviewWidget(userBloc: widget.userBloc),
+                  ));
+            },
+            child: const Text('Get API')),
       ),
     );
   }
