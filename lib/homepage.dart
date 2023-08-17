@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interface_abstract_flutter_demo/listwidget.dart';
-
 import 'bloc_http/bloc/user_bloc_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     widget.userBloc = BlocProvider.of<UserBlocBloc>(context);
+    widget.userBloc.add(GetUserList()); // Dispatch the event
   }
 
   @override
@@ -25,8 +25,6 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: ElevatedButton(
             onPressed: () {
-              widget.userBloc.add(GetUserList()); // Dispatch the event
-
               Navigator.push(
                   context,
                   MaterialPageRoute(
