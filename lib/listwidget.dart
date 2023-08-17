@@ -21,16 +21,15 @@ class _ListviewWidgetState extends State<ListviewWidget> {
         child: BlocBuilder<UserBlocBloc, UserBlocState>(
           builder: (context, state) {
             if (state.status == UsersStatus.initial) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else if (state.status == UsersStatus.loading) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             } else if (state.status == UsersStatus.success) {
               return ListView.builder(
                 itemCount: state.users.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(state.users[index]
-                        .name), // Adjust to your UserModel structure
+                    title: Text(state.users[index].name),
                   );
                 },
               );
@@ -39,7 +38,7 @@ class _ListviewWidgetState extends State<ListviewWidget> {
                 child: Text('Failed to get users.'),
               );
             } else {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),

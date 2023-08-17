@@ -5,7 +5,7 @@ import 'bloc_http/bloc/user_bloc_bloc.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
-  var userBloc;
+  late var userBloc;
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -14,8 +14,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    widget.userBloc = BlocProvider.of<UserBlocBloc>(context);
-    widget.userBloc.add(GetUserList()); // Dispatch the event
   }
 
   @override
@@ -25,6 +23,8 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: ElevatedButton(
             onPressed: () {
+              widget.userBloc = BlocProvider.of<UserBlocBloc>(context);
+              widget.userBloc.add(GetUserList()); // Dispatch the event
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
                         ListviewWidget(userBloc: widget.userBloc),
                   ));
             },
-            child: const Text('Get API')),
+            child: const Text('HIT API')),
       ),
     );
   }
